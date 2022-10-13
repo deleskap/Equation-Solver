@@ -14,11 +14,15 @@ public class EquationEvent {
     @GeneratedValue
     private Long id;
     private Timestamp date;
+    private String equation;
+    private double result;
 
     public EquationEvent() {
     }
 
-    public EquationEvent(Timestamp date) {
+    public EquationEvent(Timestamp date, String equation, double result) {
         this.date = date;
+        this.equation = equation;
+        this.result = result;
     }
 }
