@@ -1,4 +1,4 @@
-package pl.kurs.equationsolver.service;
+package pl.kurs.equationsolver.services;
 
 import pl.kurs.equationsolver.model.EquationEvent;
 

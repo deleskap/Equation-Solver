@@ -1,4 +1,4 @@
-package pl.kurs.equationsolver.service;
+package pl.kurs.equationsolver.services;
 
 import org.springframework.stereotype.Service;
 import pl.kurs.equationsolver.dao.EquationEventDao;
