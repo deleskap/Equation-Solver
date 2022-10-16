@@ -20,32 +20,6 @@
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-assembly-plugin</artifactId>-->
-<!--                <version>3.3.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>make-assembly</id>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>single</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--                <configuration>-->
-<!--                    <archive>-->
-<!--                        <manifest>-->
-<!--                            <mainClass>pl.kurs.equationsolver.app.Main</mainClass>-->
-<!--                        </manifest>-->
-<!--                    </archive>-->
-<!--                    <descriptorRefs>-->
-<!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
-<!--                    </descriptorRefs>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -106,11 +80,9 @@
                                 <!--                                <exclude>**/*pl/kurs/models/Car.class</exclude>  to wyklucza poszczególną klasę-->
                                 <exclude>**/*pl/kurs/equationsolver/model/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/app/*</exclude>
-                                <exclude>**/*pl/kurs/equationsolver/arithmetics/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/config/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/dao/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/exceptions/*</exclude>
-                                <exclude>**/*pl/kurs/equationsolver/services/EquationEventService.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -125,11 +97,9 @@
                                 <!--   <exclude>**/*pl/kurs/models/Car.class</exclude>  to wyklucza poszczególną klasę-->
                                 <exclude>**/*pl/kurs/equationsolver/model/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/app/*</exclude>
-                                <exclude>**/*pl/kurs/equationsolver/arithmetics/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/config/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/dao/*</exclude>
                                 <exclude>**/*pl/kurs/equationsolver/exceptions/*</exclude>
-                                <exclude>**/*pl/kurs/equationsolver/services/EquationEventService.class</exclude>
                             </excludes>
                             <rules>
                                 <rule>
@@ -168,6 +138,12 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <version>2.5.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -241,6 +217,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.22</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

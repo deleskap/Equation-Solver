@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 @Service
 public class EquationService implements IEquationService {
     private IAdditionService addition;
-    private ISubstractionService substraction;
+    private ISubtractionService subtraction;
     private IMultiplicationService multiplication;
     private IDivisionService division;
     private IEquationEventService equationEventService;
 
-    public EquationService(IAdditionService addition, ISubstractionService substraction, IMultiplicationService multiplication, IDivisionService division, IEquationEventService equationEventService) {
+    public EquationService(IAdditionService addition, ISubtractionService subtraction, IMultiplicationService multiplication, IDivisionService division, IEquationEventService equationEventService) {
         this.addition = addition;
-        this.substraction = substraction;
+        this.subtraction = subtraction;
         this.multiplication = multiplication;
         this.division = division;
         this.equationEventService = equationEventService;
@@ -30,13 +30,15 @@ public class EquationService implements IEquationService {
 
     @Override
     public double calculate(String inputEquation) throws InvalidEquationFormatException, UnknownOperatorException {
+
         validateInput(inputEquation);
         String[] input = inputEquation.split(" ");
         double result;
 
         LinkedList<String> list = Arrays.stream(input).collect(Collectors.toCollection(LinkedList::new));
 
-        System.out.println(list);
+        System.out.println("Equation steps: ");
+        System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " ") + " =");
 
         while (list.stream().anyMatch(x -> x.equals("*") || x.equals("/"))) {
             for (int i = 1; i < list.size(); i = i + 2) {
@@ -45,14 +47,14 @@ public class EquationService implements IEquationService {
                     list.set(i, String.valueOf(m));
                     list.remove(i + 1);
                     list.remove(i - 1);
-                    System.out.println(list);
+                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " ") + " =");
                     break;
                 } else if (list.get(i).equals("/")) {
                     double d = division.divide(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
                     list.set(i, String.valueOf(d));
                     list.remove(i + 1);
                     list.remove(i - 1);
-                    System.out.println(list);
+                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " ") + " =");
                     break;
                 }
             }
@@ -64,14 +66,14 @@ public class EquationService implements IEquationService {
                     list.set(i, String.valueOf(a));
                     list.remove(i + 1);
                     list.remove(i - 1);
-                    System.out.println(list);
+                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " "));
                     break;
                 } else if (list.get(i).equals("-")) {
-                    double s = substraction.substract(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
+                    double s = subtraction.subtract(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
                     list.set(i, String.valueOf(s));
                     list.remove(i + 1);
                     list.remove(i - 1);
-                    System.out.println(list);
+                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " "));
                     break;
                 }
             }
@@ -96,7 +98,7 @@ public class EquationService implements IEquationService {
             try {
                 Double.parseDouble(split[i]);
             } catch (Exception e) {
-                throw new InvalidEquationFormatException("Invalid equation format.");
+                throw new InvalidEquationFormatException("Invalid equation format. Input should be as follows '2 + 2 / 2 * 2'. Remember to add spaces.");
             }
         }
         for (int i = 1; i < split.length; i = i + 2) {

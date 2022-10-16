@@ -13,17 +13,14 @@ public class Main {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Main.class);
         EquationService equationService = ctx.getBean(EquationService.class);
 
-        double result = equationService.calculate(args[0]);
-      System.out.println(args[0] + " = " + result);
-////
+        double result;
 
+        try {
+            result = equationService.calculate(args[0]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidEquationFormatException("Empty args[]");
+        }
 
-
-
-
+        System.out.println("Result = " + result);
     }
-
-
-
-
 }

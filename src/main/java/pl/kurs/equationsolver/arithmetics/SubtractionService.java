@@ -3,9 +3,9 @@ package pl.kurs.equationsolver.arithmetics;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SubstractionService implements ISubstractionService{
+public class SubtractionService implements ISubtractionService {
     @Override
-    public double substract(double x, double y) {
+    public double subtract(double x, double y) {
         return x-y;
     }
 }
