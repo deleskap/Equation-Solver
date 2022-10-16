@@ -1,7 +1,6 @@
 package pl.kurs.arithmetics;
 
 import org.junit.Test;
-import pl.kurs.equationsolver.arithmetics.MultiplicationService;
 import pl.kurs.equationsolver.arithmetics.SubtractionService;
 
 import static org.junit.Assert.assertTrue;

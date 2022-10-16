@@ -3,8 +3,6 @@ package pl.kurs.arithmetics;
 import org.junit.Test;
 import pl.kurs.equationsolver.arithmetics.AdditionService;
 
-import java.util.Optional;
-
 import static org.junit.Assert.*;
 
 public class AdditionServiceTest {

@@ -1,10 +1,7 @@
 package pl.kurs.arithmetics;
 
 import org.junit.Test;
-import pl.kurs.equationsolver.arithmetics.AdditionService;
 import pl.kurs.equationsolver.arithmetics.DivisionService;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DivisionServiceTest {

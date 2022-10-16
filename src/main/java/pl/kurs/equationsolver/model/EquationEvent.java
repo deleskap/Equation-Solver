@@ -1,8 +1,6 @@
 package pl.kurs.equationsolver.model;
 
 
-import org.springframework.context.annotation.Configuration;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;

@@ -21,17 +21,16 @@ public class EquationServiceTest {
 
 //
     @Mock AdditionService additionMock;
-    @Mock
-    SubtractionService substractionMock;
+    @Mock SubtractionService subtractionMock;
     @Mock DivisionService divisionMock;
     @Mock MultiplicationService multiplicationMock;
     @Mock EquationEventService equationEventMock;
-      EquationService equationService;
+    EquationService equationService;
 //
     @Before
     public void setup(){
         MockitoAnnotations.openMocks(this);
-        equationService = new EquationService(additionMock, substractionMock, multiplicationMock, divisionMock,equationEventMock);
+        equationService = new EquationService(additionMock, subtractionMock, multiplicationMock, divisionMock,equationEventMock);
     }
 //
     // validateInput()
@@ -64,8 +63,8 @@ public class EquationServiceTest {
         Mockito.when(additionMock.add(2,4)).thenReturn(6.0);
         Mockito.when(multiplicationMock.multiply(2,2)).thenReturn(4.0);
         Mockito.when(divisionMock.divide(2,1)).thenReturn(1.0);
-        Mockito.when(substractionMock.subtract(4,2)).thenReturn(2.0);
-        Mockito.when(substractionMock.subtract(6,1)).thenReturn(5.0);
+        Mockito.when(subtractionMock.subtract(4,2)).thenReturn(2.0);
+        Mockito.when(subtractionMock.subtract(6,1)).thenReturn(5.0);
 
         assertTrue(equationService.calculate("2 + 2 * 2 - 2 / 1 ")==5.0);
 

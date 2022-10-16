@@ -14,7 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import java.sql.Timestamp;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Main.class})
