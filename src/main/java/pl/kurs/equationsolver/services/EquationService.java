@@ -8,91 +8,68 @@ import pl.kurs.equationsolver.model.EquationEvent;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class EquationService implements IEquationService {
-    private IAdditionService addition;
-    private ISubtractionService subtraction;
-    private IMultiplicationService multiplication;
-    private IDivisionService division;
-    private IEquationEventService equationEventService;
 
-    public EquationService(IAdditionService addition, ISubtractionService subtraction, IMultiplicationService multiplication, IDivisionService division, IEquationEventService equationEventService) {
-        this.addition = addition;
-        this.subtraction = subtraction;
-        this.multiplication = multiplication;
-        this.division = division;
+    private IEquationEventService equationEventService;
+    private HashMap<String, IMathOperation> mathOperations;
+
+    public EquationService(IEquationEventService equationEventService, HashMap<String, IMathOperation> mathOperations) {
         this.equationEventService = equationEventService;
+        this.mathOperations = mathOperations;
     }
 
     @Override
     public double calculate(String inputEquation) throws InvalidEquationFormatException, UnknownOperatorException {
 
-        validateInput(inputEquation);
-        String[] input = inputEquation.split(" ");
         double result;
 
+        String[] input = validateInput(inputEquation);
         LinkedList<String> list = Arrays.stream(input).collect(Collectors.toCollection(LinkedList::new));
 
         System.out.println("Equation steps: ");
-        System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " ") + " =");
+        System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "") + " =");
 
         while (list.stream().anyMatch(x -> x.equals("*") || x.equals("/"))) {
             for (int i = 1; i < list.size(); i = i + 2) {
-                if (list.get(i).equals("*")) {
-                    double m = multiplication.multiply(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
-                    list.set(i, String.valueOf(m));
+                if (list.get(i).equals("*") || list.get(i).equals("/")) {
+                    double res = mathOperations.get(list.get(i)).calculate(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
+                    list.set(i, String.valueOf(res));
                     list.remove(i + 1);
                     list.remove(i - 1);
-                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " ") + " =");
-                    break;
-                } else if (list.get(i).equals("/")) {
-                    double d = division.divide(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
-                    list.set(i, String.valueOf(d));
-                    list.remove(i + 1);
-                    list.remove(i - 1);
-                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " ") + " =");
+                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "") + " =");
                     break;
                 }
             }
         }
+
         while (list.stream().anyMatch(x -> x.equals("+") || x.equals("-"))) {
             for (int i = 1; i < list.size(); i = i + 2) {
-                if (list.get(i).equals("+")) {
-                    double a = addition.add(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
-                    list.set(i, String.valueOf(a));
+                if (list.get(i).equals("+") || list.get(i).equals("-")) {
+                    double res = mathOperations.get(list.get(i)).calculate(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
+                    list.set(i, String.valueOf(res));
                     list.remove(i + 1);
                     list.remove(i - 1);
-                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " "));
-                    break;
-                } else if (list.get(i).equals("-")) {
-                    double s = subtraction.subtract(Double.parseDouble(list.get(i - 1)), Double.parseDouble(list.get(i + 1)));
-                    list.set(i, String.valueOf(s));
-                    list.remove(i + 1);
-                    list.remove(i - 1);
-                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", " "));
+                    System.out.println(list.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "") + " =");
                     break;
                 }
             }
         }
         result = Double.parseDouble(list.get(0));
-        equationEventService.saveEvent(
-                new EquationEvent(
-                        Timestamp.from(Instant.now()),
-                        inputEquation,
-                        result
-                )
-        );
-
+        equationEventService.saveEvent(new EquationEvent(Timestamp.from(Instant.now()), inputEquation, result));
         return result;
     }
 
 
-    private static void validateInput(String input) throws InvalidEquationFormatException, UnknownOperatorException {
-        String[] split = input.split(" ");
+    private static String[] validateInput(String input) throws InvalidEquationFormatException, UnknownOperatorException {
+
+        String inputString = Optional.ofNullable(input)
+                .orElseThrow(() -> new InvalidEquationFormatException("Argument is null"));
+
+        String[] split = inputString.split(" ");
 
         for (int i = 0; i < split.length; i = i + 2) {
             try {
@@ -112,5 +89,6 @@ public class EquationService implements IEquationService {
                 throw new InvalidEquationFormatException("Cannot divide by 0.");
             }
         }
+        return split;
     }
 }

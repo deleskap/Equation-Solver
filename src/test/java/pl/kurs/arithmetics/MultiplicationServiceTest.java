@@ -9,8 +9,13 @@ public class MultiplicationServiceTest {
     MultiplicationService multiplication = new MultiplicationService();
 
     @Test
-    public void shouldReturn20(){
-        assertTrue(multiplication.multiply(4,5)==20.0);
+    public void shouldReturn20() {
+        assertTrue(multiplication.calculate(4, 5) == 20.0);
+    }
+
+    @Test
+    public void shouldReturnMinus8() {
+        assertTrue(multiplication.calculate(4, -2) == -8);
     }
 
 }

@@ -13,8 +13,9 @@ import javax.sql.DataSource;
 
 @Configuration
 public class JpaConfig {
+
     @Bean
-    public LocalContainerEntityManagerFactoryBean createEmf(JpaVendorAdapter adapter, DataSource dataSource){
+    public LocalContainerEntityManagerFactoryBean createEmf(JpaVendorAdapter adapter, DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setJpaVendorAdapter(adapter);
         emf.setPackagesToScan("pl.kurs.equationsolver.model");
@@ -22,9 +23,9 @@ public class JpaConfig {
         return emf;
     }
 
-   @Profile("prod")
+    @Profile("prod")
     @Bean
-    public JpaVendorAdapter createVendorAdapterProd(){
+    public JpaVendorAdapter createVendorAdapterProd() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.MYSQL);
         adapter.setShowSql(true);
@@ -34,7 +35,7 @@ public class JpaConfig {
 
     @Profile("prod")
     @Bean
-    public DataSource createDataSourceProd(){
+    public DataSource createDataSourceProd() {
         BasicDataSource ds = new BasicDataSource();
         ds.setUrl("jdbc:mysql://localhost:3306/equation_solver?useSSL=false&serverTimezone=UTC");
         ds.setPassword("root");
@@ -46,7 +47,7 @@ public class JpaConfig {
 
     @Profile("dev")
     @Bean
-    public JpaVendorAdapter createVendorAdapterDev(){
+    public JpaVendorAdapter createVendorAdapterDev() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.H2);
         adapter.setShowSql(true);
@@ -56,7 +57,7 @@ public class JpaConfig {
 
     @Profile("dev")
     @Bean
-    public DataSource createDataSourceDev(){
+    public DataSource createDataSourceDev() {
         BasicDataSource ds = new BasicDataSource();
         ds.setUrl("jdbc:h2:mem:testdb");
         ds.setUsername("sa");

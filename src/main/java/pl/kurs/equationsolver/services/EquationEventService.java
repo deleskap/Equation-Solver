@@ -7,7 +7,7 @@ import pl.kurs.equationsolver.model.EquationEvent;
 import java.util.Optional;
 
 @Service
-public class EquationEventService implements IEquationEventService{
+public class EquationEventService implements IEquationEventService {
 
     private EquationEventDao equationEventDao;
 

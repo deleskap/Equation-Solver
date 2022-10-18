@@ -9,8 +9,13 @@ public class SubtractionServiceTest {
     SubtractionService subtraction = new SubtractionService();
 
     @Test
-    public void shouldReturn20(){
-        assertTrue(subtraction.subtract(100,5)==95.0);
+    public void shouldReturn20() {
+        assertTrue(subtraction.calculate(100, 5) == 95.0);
+    }
+
+    @Test
+    public void shouldReturnMinus15() {
+        assertTrue(subtraction.calculate(100, 115) == -15.0);
     }
 
 }

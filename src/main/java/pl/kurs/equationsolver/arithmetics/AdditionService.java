@@ -3,9 +3,9 @@ package pl.kurs.equationsolver.arithmetics;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdditionService implements IAdditionService{
+public class AdditionService implements IMathOperation {
     @Override
-    public double add(double x, double y) {
-        return x+y;
+    public double calculate(double x, double y) {
+        return x + y;
     }
 }

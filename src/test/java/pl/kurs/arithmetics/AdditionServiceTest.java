@@ -9,8 +9,13 @@ public class AdditionServiceTest {
     AdditionService addition = new AdditionService();
 
     @Test
-    public void shouldReturn20(){
-        assertTrue(addition.add(4,16)==20.0);
+    public void shouldReturn20() {
+        assertTrue(addition.calculate(4, 16) == 20);
+    }
+
+    @Test
+    public void shouldReturnMinus4() {
+        assertTrue(addition.calculate(4, -8) == -4);
     }
 
 }

@@ -27,24 +27,20 @@ public class EquationEventServiceTest {
     @Autowired
     private EntityManagerFactory factory;
 
-
     @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentExceptionWhenNull(){
+    public void shouldThrowIllegalArgumentExceptionWhenNull() {
         service.saveEvent(null);
     }
 
     @Test
-    public void shouldSaveToDatabase(){
+    public void shouldSaveToDatabase() {
         //given
-        EquationEvent eventToSave = new EquationEvent(Timestamp.valueOf("2022-10-16 21:14:44.71098"),"2 + 2", 4.0);
+        EquationEvent eventToSave = new EquationEvent(Timestamp.valueOf("2022-10-16 21:14:44.71098"), "2 + 2", 4.0);
         //when
         service.saveEvent(eventToSave);
         //then
         assertEquals(eventToSave, factory.createEntityManager().find(EquationEvent.class, 1L));
-
     }
-
-
 
 
 }
