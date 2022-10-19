@@ -65,35 +65,49 @@ public class EquationServiceTest {
         equationService.calculate("2  / 2");
     }
 
+    @Test(expected = InvalidEquationFormatException.class)
+    public void shouldThrowInvalidEquationFormatExceptionWhenNull() throws InvalidEquationFormatException, UnknownOperatorException {
+        equationService.calculate(null);
+    }
+
     //    //calculate()
     @Test
-    public void shouldReturn4() throws InvalidEquationFormatException, UnknownOperatorException {
-
+    public void shouldReturn4WhenMixedOperators1() throws InvalidEquationFormatException, UnknownOperatorException {
         assertTrue(equationService.calculate("2 + 2 * 2 - 2 / 1") == 4.0);
     }
 
     @Test
-    public void shouldReturn5() throws InvalidEquationFormatException, UnknownOperatorException {
+    public void shouldReturn4WhenMixedOperators2() throws InvalidEquationFormatException, UnknownOperatorException {
+        assertTrue(equationService.calculate("3 + 2 / -1 - 8 * 15") == -119.0);
+    }
+
+    @Test
+    public void shouldReturn5WhenAdd() throws InvalidEquationFormatException, UnknownOperatorException {
         assertTrue(equationService.calculate("2 + 3") == 5.0);
     }
 
     @Test
-    public void shouldReturnMinus1() throws InvalidEquationFormatException, UnknownOperatorException {
+    public void shouldReturnMinus1WhenAddNegative() throws InvalidEquationFormatException, UnknownOperatorException {
         assertTrue(equationService.calculate("2 + -3") == -1.0);
     }
 
     @Test
-    public void shouldReturn9801() throws InvalidEquationFormatException, UnknownOperatorException {
+    public void shouldReturn9801WhenMultiply() throws InvalidEquationFormatException, UnknownOperatorException {
         assertTrue(equationService.calculate("99 * 99") == 9801);
     }
 
     @Test
-    public void shouldReturn2() throws InvalidEquationFormatException, UnknownOperatorException {
-        assertTrue(equationService.calculate("4 / 2       ") == 2);
+    public void shouldReturn2WhenDivide() throws InvalidEquationFormatException, UnknownOperatorException {
+        assertTrue(equationService.calculate("4 / 2") == 2);
     }
 
     @Test
-    public void shouldReturn3() throws InvalidEquationFormatException, UnknownOperatorException {
+    public void shouldReturn3WhenSubtract() throws InvalidEquationFormatException, UnknownOperatorException {
         assertTrue(equationService.calculate("5 - 2") == 3);
+    }
+
+    @Test
+    public void shouldReturn3WhenAddThenSubtract() throws InvalidEquationFormatException, UnknownOperatorException {
+        assertTrue(equationService.calculate("5 + 2 + 2 - 4 - 2") == 3);
     }
 }
