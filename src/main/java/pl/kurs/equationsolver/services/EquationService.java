@@ -5,7 +5,6 @@ import pl.kurs.equationsolver.arithmetics.*;
 import pl.kurs.equationsolver.exceptions.InvalidEquationFormatException;
 import pl.kurs.equationsolver.exceptions.UnknownOperatorException;
 import pl.kurs.equationsolver.model.EquationEvent;
-
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.*;

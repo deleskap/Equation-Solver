@@ -15,7 +15,6 @@ import pl.kurs.equationsolver.exceptions.InvalidEquationFormatException;
 import pl.kurs.equationsolver.exceptions.UnknownOperatorException;
 import pl.kurs.equationsolver.services.EquationEventService;
 import pl.kurs.equationsolver.services.EquationService;
-
 import java.util.HashMap;
 
 import static org.junit.Assert.*;

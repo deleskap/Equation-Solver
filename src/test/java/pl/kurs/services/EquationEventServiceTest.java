@@ -9,9 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.kurs.equationsolver.app.Main;
 import pl.kurs.equationsolver.model.EquationEvent;
 import pl.kurs.equationsolver.services.EquationEventService;
-
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import java.sql.Timestamp;
 
